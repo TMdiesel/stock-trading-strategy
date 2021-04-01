@@ -19,10 +19,53 @@
 ### 株価データ収集
 - 株の銘柄情報や株価情報を保存するテーブルを作成します。
     ```
-    sqlite3 data/stock.db < ./src/data_collect/create_table.sql
+    sqlite3 data/mstock.db < ./src/data_collect/create_table.sql
     ```
+- [Kabutan](https://kabutan.jp/)から銘柄情報を取得し、brandsテーブルに登録します。
+    ```
+    python src/data_collect/get_brands.py
+    ```
+
 ### バックテスト
 ### 売買戦略
+
+
+## テーブルのスキーマ
+各テーブルのスキーマは下記のようになっています。
+### brands
+| column name | code | name | short_name| market| sector|unit|
+| :---: | :---:       | :---: | :---:| :---:| :---:| :---:|
+| data type | text   | text | text|text | text|integer|
+| primary key | ○   |  | | | | |
+| 説明 |   銘柄コード | 銘柄名 |銘柄名(略称) | 上場市場名|所属セクタ |単元数 |
+### divide_union_data
+| column name | date_of_right_allotment | code | name| before | after |
+| :---: | :---:       | :---: | :---:| :---:| :---:| 
+| data type | text   | integer | text|float | float|
+| primary key | ○   | ○ | | | | |
+| 説明 |   適用日付 | 銘柄コード |銘柄名 | 分割・併合前の株数|分割・併合後の株数 |
+
+### raw_prices
+| column name | code | date | open| high| low|close|volume|adjust|
+| :---: | :---:       | :---: | :---:| :---:| :---:| :---:|:---:|:---:|
+| data type | text   | text | real|real | real|real|intger|real|
+| primary key | ○   | ○ | | | | |
+| 説明 |   銘柄コード | 日付 |始値 | 高値|低値 |終値 |出来高|*使えない|
+
+### applied_divide_union_data
+| column name | date_of_right_allotment | code | 
+| :---: | :---:       | :---:       |
+| data type | text   | integer | 
+| primary key | ○   | ○ |
+| 説明 |   適用日付 | 銘柄コード |
+
+### prices
+| column name | code | date | open| high| low|close|volume|adjust|
+| :---: | :---:       | :---: | :---:| :---:| :---:| :---:|:---:|:---:|
+| data type | text   | text | real|real | real|real|intger|real|
+| primary key | ○   | ○ | | | | |
+| 説明 |   銘柄コード | 日付 |調整後始値 | 調整後高値|調整後低値 |調整後終値 |調整後出来高|*使えない|
+
 
 ## LICENSE
 MIT
