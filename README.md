@@ -17,9 +17,10 @@
       - 必要な株データをWebから収集し、データベースで管理します。
     - [バックテスト](#バックテスト)
     - [売買戦略](#売買戦略)
+
 ### 株価データ収集
 - 株の銘柄情報や株価情報を保存するテーブルを作成します。
-対象銘柄はTOPIX Core30の内、[株式投資メモ](https://kabuoji3.com/stock/)で取得可能な26企業です。
+対象銘柄はTOPIX Core30の内、[株式投資メモ](https://kabuoji3.com/stock/)で取得可能な26企業(以降、Core26と呼称します。)です。
     ```
     sqlite3 data/mstock.db < ./sql/create_table.sql
     ```
@@ -32,6 +33,25 @@
     ```
     python src/data_collect/get_stockprice.py  
     ```
+
+- [auカブコム証券](https://kabu.com/investment/meigara/bunkatu.html)から分割・併合を取得し、divide_union_dataテーブルに登録します。
+    ```
+    python src/data_collect/get_divide_union.py
+    ```
+- 分割・併合による価格調整を行います。
+    ```
+    python src/data_collect/adjust_price.py
+    ```
+- 2010年以降のCore26の銘柄の株価推移です。
+    ```
+    simulator/pricesdb_check.ipynb
+    ```
+
+
+    テーブル名：divide_union_data(分割・併合情報), prices(調整後価格), applied_divide_union_data(適用済み分割併合情報)  
+    rawデータ：simulator/union.dat, simulator/divide.dat
+
+
 
 ### バックテスト
 ### 売買戦略

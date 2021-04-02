@@ -1,7 +1,7 @@
 import os
+import pickle
 import sqlite3
 import time
-import pickle
 
 from pyquery import PyQuery
 
@@ -51,5 +51,5 @@ def insert_brands_to_db(db_file_name, code_range):
 
 if __name__ == "__main__":
     with open("./data/codelist_core26.pkl", "rb") as f:
-        code_list_core26 = pickle.load(f) 
+        code_list_core26 = pickle.load(f)
     insert_brands_to_db(os.environ.get("DB_PATH"), code_list_core26)
