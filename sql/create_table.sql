@@ -32,13 +32,6 @@ CREATE TABLE delete_brands ( -- 廃止 情報
                             PRIMARY KEY( code, date) );
 
 --分割・併合
-CREATE TABLE divide_union_data ( code TEXT, -- 銘柄 コード 
-                                date_of_right_allotment TEXT, -- 権利 確定 日
-                                before_stock REAL, -- 分割・併合 前 株 数 
-                                after_stock REAL, -- 分割・併合 後 株 数
-                                PRIMARY KEY( code, date_of_right_allotment)
-                                  );
-
 CREATE TABLE applied_divide_union_data ( code TEXT, -- 銘柄 コード 
                                 date_of_right_allotment TEXT, -- 権利 確定 日
                                 PRIMARY KEY( code, date_of_right_allotment)

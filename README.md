@@ -38,19 +38,14 @@
     ```
     python src/data_collect/get_divide_union.py
     ```
-- 分割・併合による価格調整を行います。
+- 分割・併合による価格調整を行い、それをpricesテーブルに登録します。
     ```
     python src/data_collect/adjust_price.py
     ```
 - 2010年以降のCore26の銘柄の株価推移です。
     ```
-    simulator/pricesdb_check.ipynb
+    notebooks/prices_check.ipynb
     ```
-
-
-    テーブル名：divide_union_data(分割・併合情報), prices(調整後価格), applied_divide_union_data(適用済み分割併合情報)  
-    rawデータ：simulator/union.dat, simulator/divide.dat
-
 
 
 ### バックテスト
