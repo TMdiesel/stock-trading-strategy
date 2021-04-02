@@ -17,6 +17,7 @@ CREATE TABLE raw_prices ( code TEXT, -- 銘柄 コード
                            low REAL, -- 安値 
                            close REAL, -- 終値 
                            volume INTEGER, -- 出来高 
+                           adjust REAL, -- 出来高
                            PRIMARY KEY( code, date) );
 
 --上場株

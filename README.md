@@ -7,6 +7,7 @@
    poetry install
    ```
 - sqlite3をインストールします。
+- Pythonスクリプト実行時に環境変数の設定が必要となる場合があります。設定が必要な環境変数は`.sample.env`をご参照ください。
 
 ## 構成
 ### 全体概要
@@ -18,12 +19,18 @@
     - [売買戦略](#売買戦略)
 ### 株価データ収集
 - 株の銘柄情報や株価情報を保存するテーブルを作成します。
+対象銘柄はTOPIX Core30の内、[株式投資メモ](https://kabuoji3.com/stock/)で取得可能な26企業です。
     ```
-    sqlite3 data/mstock.db < ./src/data_collect/create_table.sql
+    sqlite3 data/mstock.db < ./sql/create_table.sql
     ```
 - [Kabutan](https://kabutan.jp/)から銘柄情報を取得し、brandsテーブルに登録します。
     ```
     python src/data_collect/get_brands.py
+    ```
+
+-  [株式投資メモ](https://kabuoji3.com/stock/)から株価情報を取得し、raw_pricesテーブルに登録します。
+    ```
+    python src/data_collect/get_stockprice.py  
     ```
 
 ### バックテスト
@@ -66,6 +73,9 @@
 | primary key | ○   | ○ | | | | |
 | 説明 |   銘柄コード | 日付 |調整後始値 | 調整後高値|調整後低値 |調整後終値 |調整後出来高|*使えない|
 
+## その他
+- `scripts/lint.sh` : lint using pysen
+- `scripts/format.sh`: format using pysen
 
 ## LICENSE
 MIT
