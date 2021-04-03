@@ -21,6 +21,9 @@ pyquery = "^1.4.3"
 tqdm = "^4.59.0"
 beautifulsoup4 = "^4.9.3"
 html5lib = "^1.1"
+torch = "^1.8.1"
+pfrl = "^0.2.1"
+gym = "^0.18.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
